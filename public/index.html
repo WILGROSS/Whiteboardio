@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Whiteboardio</h1>
+  <p id="status"></p>
   <div id="toolbar">
     <button class="swatch" data-color="#1a1a1a" style="background:#1a1a1a"></button>
     <button class="swatch" data-color="#e74c3c" style="background:#e74c3c"></button>
@@ -17,6 +17,7 @@
     <button class="swatch" data-color="#3498db" style="background:#3498db"></button>
     <button class="swatch" data-color="#9b59b6" style="background:#9b59b6"></button>
     <button id="eraser">Eraser</button>
+    <input type="range" id="thickness" min="1" max="30" value="3" title="Line thickness" />
     <button id="clear">Clear</button>
   </div>
   <canvas id="canvas"></canvas>

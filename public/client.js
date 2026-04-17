@@ -1,8 +1,6 @@
 const ws = new WebSocket(`ws://${location.host}`);
 
-const status = document.createElement('p');
-status.id = 'status';
-document.body.insertBefore(status, document.querySelector('#toolbar'));
+const status = document.getElementById('status');
 
 ws.addEventListener('open', () => {
   status.textContent = 'Connected';
@@ -26,8 +24,13 @@ ws.addEventListener('message', (event) => {
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = 800;
-canvas.height = 500;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 let drawing = false;
 let lastX = 0;
@@ -38,6 +41,7 @@ let erasing = false;
 // Toolbar
 const swatches = document.querySelectorAll('.swatch');
 const eraserBtn = document.getElementById('eraser');
+const thicknessSlider = document.getElementById('thickness');
 
 swatches[0].classList.add('active');
 
@@ -86,7 +90,7 @@ canvas.addEventListener('mousemove', (e) => {
   if (!drawing) return;
   const { x, y } = getPos(e);
   const color = erasing ? '#ffffff' : currentColor;
-  const lineWidth = erasing ? 20 : 3;
+  const lineWidth = erasing ? Number(thicknessSlider.value) * 4 : Number(thicknessSlider.value);
   drawLine(lastX, lastY, x, y, color, lineWidth);
   if (ws.readyState === WebSocket.OPEN) {
     ws.send(JSON.stringify({ type: 'draw', x0: lastX, y0: lastY, x1: x, y1: y, color, lineWidth }));
