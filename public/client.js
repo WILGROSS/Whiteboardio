@@ -14,6 +14,13 @@ ws.addEventListener('close', () => {
   status.style.color = 'red';
 });
 
+ws.addEventListener('message', (event) => {
+  const msg = JSON.parse(event.data);
+  if (msg.type === 'draw') {
+    drawLine(msg.x0, msg.y0, msg.x1, msg.y1, msg.color, msg.lineWidth);
+  }
+});
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -56,12 +63,12 @@ function getPos(e) {
   };
 }
 
-function drawLine(x0, y0, x1, y1, color) {
+function drawLine(x0, y0, x1, y1, color, lineWidth = 3) {
   ctx.beginPath();
   ctx.moveTo(x0, y0);
   ctx.lineTo(x1, y1);
   ctx.strokeStyle = color;
-  ctx.lineWidth = erasing ? 20 : 3;
+  ctx.lineWidth = lineWidth;
   ctx.lineCap = 'round';
   ctx.stroke();
 }
@@ -76,7 +83,12 @@ canvas.addEventListener('mousedown', (e) => {
 canvas.addEventListener('mousemove', (e) => {
   if (!drawing) return;
   const { x, y } = getPos(e);
-  drawLine(lastX, lastY, x, y, erasing ? '#ffffff' : currentColor);
+  const color = erasing ? '#ffffff' : currentColor;
+  const lineWidth = erasing ? 20 : 3;
+  drawLine(lastX, lastY, x, y, color, lineWidth);
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ type: 'draw', x0: lastX, y0: lastY, x1: x, y1: y, color, lineWidth }));
+  }
   lastX = x;
   lastY = y;
 });
