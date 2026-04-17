@@ -18,6 +18,41 @@ h1 {
   color: #333;
 }
 
+#toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.swatch {
+  width: 32px;
+  height: 32px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.swatch.active {
+  border-color: #333;
+}
+
+#eraser {
+  padding: 4px 12px;
+  height: 32px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+#eraser.active {
+  border-color: #333;
+  background: #eee;
+}
+
 canvas {
   background: #fff;
   border: 1px solid #ccc;
