@@ -17,3 +17,12 @@ h1 {
   margin-bottom: 1rem;
   color: #333;
 }
+
+canvas {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: crosshair;
+  width: 800px;
+  height: 500px;
+}
