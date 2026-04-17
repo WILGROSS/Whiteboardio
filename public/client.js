@@ -18,6 +18,8 @@ ws.addEventListener('message', (event) => {
   const msg = JSON.parse(event.data);
   if (msg.type === 'draw') {
     drawLine(msg.x0, msg.y0, msg.x1, msg.y1, msg.color, msg.lineWidth);
+  } else if (msg.type === 'clear') {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 });
 
@@ -95,3 +97,10 @@ canvas.addEventListener('mousemove', (e) => {
 
 canvas.addEventListener('mouseup', () => { drawing = false; });
 canvas.addEventListener('mouseleave', () => { drawing = false; });
+
+document.getElementById('clear').addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ type: 'clear' }));
+  }
+});

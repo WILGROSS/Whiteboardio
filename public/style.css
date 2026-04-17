@@ -38,7 +38,8 @@ h1 {
   border-color: #333;
 }
 
-#eraser {
+#eraser,
+#clear {
   padding: 4px 12px;
   height: 32px;
   border: 2px solid #ccc;
@@ -51,6 +52,11 @@ h1 {
 #eraser.active {
   border-color: #333;
   background: #eee;
+}
+
+#clear:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
 }
 
 canvas {

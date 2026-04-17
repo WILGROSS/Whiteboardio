@@ -15,8 +15,10 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
 
   ws.on('message', (data) => {
+    const msg = JSON.parse(data.toString());
+    const isClear = msg.type === 'clear';
     wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === 1) {
+      if (client.readyState === 1 && (isClear || client !== ws)) {
         client.send(data.toString());
       }
     });
