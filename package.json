@@ -6,7 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["whiteboard", "websockets", "nodejs", "collaborative"],
+  "keywords": [
+    "whiteboard",
+    "websockets",
+    "nodejs",
+    "collaborative"
+  ],
   "author": "WilliamGross",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
