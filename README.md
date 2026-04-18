@@ -9,6 +9,7 @@ Rita, välj färg, sudda etc. allt synkas direkt till alla som är anslutna!
 - **Express** — hanterar HTTP och serverar frontend-filerna
 - **ws** — WebSocket-bibliotek som driver realtidskommunikationen
 - **nodemon** — startar om servern automatiskt vid filändringar (dev)
+- **Supabase** — lagrar alla streck persistent så att canvasen finns kvar mellan sessioner
 
 ## Kom igång
 
@@ -34,12 +35,14 @@ Under utveckling kan man använda `npm run dev`, då startar servern om automati
 ## Funktioner
 
 - Välkomstmodal som kräver ett användarnamn innan man kan börja rita och chatta
-- Rita fritt på en fullscreen canvas
+- Rita fritt på en oändlig canvas med scroll-zoom och pan (space+drag eller mittenklick)
 - Välj färg från paletten
 - Justera penselstorlek med slidern
 - Suddgummi (skalar med slidern)
-- Clear-knapp som rensar canvasen för alla anslutna användare
 - Realtidssynk — alla stroke-event skickas via WebSockets och ritas ut hos övriga användare direkt
+- Se andras cursors i realtid med namn och färg
+- Persistent canvas: ritningarna sparas i Supabase och finns kvar när man återvänder
+- Darkmode (client side) med automatisk färganpassning
 - Live-räknare som visar antal anslutna användare
 - Notis i hörnet när någon ansluter eller lämnar
 - Inbyggd chatt: fäll in via fliken på höger sida, användarnamnet från inloggningen används när fdu skickar meddelanden
