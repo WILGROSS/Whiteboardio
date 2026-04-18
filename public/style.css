@@ -10,6 +10,57 @@ body {
   font-family: sans-serif;
 }
 
+/* Remote cursors */
+#cursors {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cursor-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  transform-origin: top left;
+}
+
+.cursor-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.cursor-label {
+  font-size: 0.72rem;
+  font-family: sans-serif;
+  font-weight: 600;
+  background: rgba(255,255,255,0.85);
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transform: translateY(-4px);
+}
+
+body.dark .cursor-label {
+  background: rgba(30,30,40,0.85);
+  color: #f0f0f0;
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-size: 18px;
+  vertical-align: middle;
+  user-select: none;
+}
+
 /* Join overlay */
 #overlay {
   position: fixed;
@@ -90,6 +141,68 @@ canvas {
   cursor: crosshair;
 }
 
+#controls-group {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
+}
+
+#help-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+#controls-tooltip {
+  position: absolute;
+  top: 0;
+  right: calc(100% + 8px);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  color: #555;
+  white-space: nowrap;
+  line-height: 1.8;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+#help-btn:hover #controls-tooltip {
+  opacity: 1;
+}
+
+#darkmode-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  font-size: 1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 #status {
   position: fixed;
   bottom: 1rem;
@@ -99,6 +212,121 @@ canvas {
   padding: 2px 8px;
   border-radius: 4px;
   z-index: 10;
+}
+
+/* Dark mode */
+body.dark {
+  background: #1a1a1e;
+}
+
+body.dark #darkmode-toggle {
+  background: rgba(40,40,50,0.85);
+  border-color: #444;
+  color: #f0f0f0;
+}
+
+body.dark #toolbar {
+  background: rgba(30,30,40,0.85);
+}
+
+body.dark #eraser {
+  background: #2a2a34;
+  border-color: #444;
+  color: #ccc;
+}
+
+body.dark #eraser.active {
+  background: #3a3a48;
+  border-color: #aaa;
+}
+
+body.dark #status {
+  background: rgba(30,30,40,0.8);
+  color: #aaa;
+}
+
+body.dark #toast {
+  background: rgba(30,30,40,0.9);
+  border-color: #444;
+  color: #ccc;
+}
+
+body.dark #user-count {
+  color: #aaa;
+}
+
+body.dark #chat-panel {
+  background: rgba(25,25,35,0.97);
+  border-color: #444;
+}
+
+body.dark #chat-tab {
+  background: rgba(25,25,35,0.97);
+  border-color: #444;
+  border-right-color: #1a1a26;
+}
+
+body.dark #chat-tab .material-symbols-outlined {
+  color: #f0f0f0;
+}
+
+body.dark #help-btn {
+  background: rgba(40,40,50,0.85);
+  border-color: #444;
+  color: #aaa;
+}
+
+body.dark #controls-tooltip {
+  background: rgba(30,30,40,0.92);
+  border-color: #444;
+  color: #aaa;
+}
+
+#chat-tab.unread {
+  background: #e74c3c;
+  border-color: #e74c3c;
+  border-right-color: white;
+  width: 60px;
+  height: 66px;
+  left: -60px;
+}
+
+#chat-tab.unread .material-symbols-outlined {
+  color: white;
+  font-size: 27px;
+}
+
+body.dark #chat-tab.unread {
+  border-right-color: #1a1a26;
+}
+
+body.dark #chat-messages {
+  color: #ccc;
+}
+
+body.dark .chat-message.system {
+  color: #666;
+}
+
+body.dark #chat-input,
+body.dark #join-input,
+body.dark #username-input {
+  background: #2a2a34;
+  border-color: #444;
+  color: #f0f0f0;
+}
+
+body.dark #join-modal {
+  background: #1e1e28;
+  color: #f0f0f0;
+}
+
+body.dark #join-modal p {
+  color: #aaa;
+}
+
+body.dark #chat-input-row {
+  border-top-color: #333;
 }
 
 #user-count {
@@ -157,8 +385,7 @@ canvas {
   border-color: #333;
 }
 
-#eraser,
-#clear {
+#eraser {
   padding: 4px 12px;
   height: 28px;
   border: 2px solid #ccc;
@@ -173,10 +400,6 @@ canvas {
   background: #eee;
 }
 
-#clear:hover {
-  border-color: #e74c3c;
-  color: #e74c3c;
-}
 
 #thickness {
   width: 80px;
@@ -224,6 +447,7 @@ canvas {
   justify-content: center;
   font-size: 1.1rem;
   cursor: pointer;
+  transition: width 0.2s ease, height 0.2s ease, left 0.2s ease, background 0.2s ease;
 }
 
 #chat-messages {

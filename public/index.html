@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Whiteboardio</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -19,6 +20,16 @@
   </div>
 
   <p id="status"></p>
+  <div id="controls-group">
+    <div id="help-btn">?
+      <div id="controls-tooltip">
+        <p>Scroll — zoom in/out</p>
+        <p>Space + drag — pan</p>
+        <p>Middle click + drag — pan</p>
+      </div>
+    </div>
+    <button id="darkmode-toggle"><span class="material-symbols-outlined">dark_mode</span></button>
+  </div>
   <div id="toast"></div>
   <div id="toolbar">
     <button class="swatch" data-color="#1a1a1a" style="background:#1a1a1a"></button>
@@ -30,13 +41,13 @@
     <button class="swatch" data-color="#9b59b6" style="background:#9b59b6"></button>
     <button id="eraser">Eraser</button>
     <input type="range" id="thickness" min="1" max="30" value="3" title="Line thickness" />
-    <button id="clear">Clear</button>
     <span id="user-count"></span>
   </div>
   <canvas id="canvas"></canvas>
+  <div id="cursors"></div>
 
   <div id="chat-panel">
-    <div id="chat-tab">💬</div>
+    <div id="chat-tab"><span class="material-symbols-outlined">chat</span></div>
     <div id="chat-messages"></div>
     <div id="chat-input-row">
       <input type="text" id="chat-input" placeholder="Type something..." maxlength="200" />
