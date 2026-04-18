@@ -18,9 +18,32 @@ ws.addEventListener('message', (event) => {
     drawLine(msg.x0, msg.y0, msg.x1, msg.y1, msg.color, msg.lineWidth);
   } else if (msg.type === 'clear') {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  } else if (msg.type === 'userjoined') {
+    document.getElementById('user-count').textContent = `👤 ${msg.count}`;
+    showToast(`${msg.name} joined`);
+    appendMessage(null, `${msg.name} joined`, true);
+  } else if (msg.type === 'userleft') {
+    document.getElementById('user-count').textContent = `👤 ${msg.count}`;
+    const name = msg.name || 'A user';
+    showToast(`${name} left`);
+    appendMessage(null, `${name} left`, true);
+  } else if (msg.type === 'chat') {
+    appendMessage(msg.name, msg.text);
   }
 });
 
+// Toast
+const toast = document.getElementById('toast');
+let toastTimer = null;
+
+function showToast(message) {
+  toast.textContent = message;
+  toast.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('visible'), 3000);
+}
+
+// Canvas
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -107,4 +130,68 @@ document.getElementById('clear').addEventListener('click', () => {
   if (ws.readyState === WebSocket.OPEN) {
     ws.send(JSON.stringify({ type: 'clear' }));
   }
+});
+
+// Join overlay
+const overlay = document.getElementById('overlay');
+const joinInput = document.getElementById('join-input');
+const joinSubmit = document.getElementById('join-submit');
+
+let username = null;
+
+function join() {
+  const name = joinInput.value.trim();
+  if (!name) return;
+  username = name;
+  overlay.classList.add('hidden');
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ type: 'setname', name: username }));
+  }
+}
+
+joinSubmit.addEventListener('click', join);
+joinInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') join();
+});
+
+// Chat
+const chatPanel = document.getElementById('chat-panel');
+const chatTab = document.getElementById('chat-tab');
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
+
+chatTab.addEventListener('click', () => {
+  chatPanel.classList.toggle('open');
+});
+
+function appendMessage(name, text, system = false) {
+  const el = document.createElement('div');
+  el.classList.add('chat-message');
+  if (system) {
+    el.classList.add('system');
+    el.textContent = text;
+  } else {
+    const author = document.createElement('span');
+    author.classList.add('author');
+    author.textContent = name + ':';
+    el.appendChild(author);
+    el.appendChild(document.createTextNode(' ' + text));
+  }
+  chatMessages.appendChild(el);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function sendChatMessage() {
+  const text = chatInput.value.trim();
+  if (!text || !username) return;
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ type: 'chat', name: username, text }));
+  }
+  chatInput.value = '';
+}
+
+chatSend.addEventListener('click', sendChatMessage);
+chatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') sendChatMessage();
 });

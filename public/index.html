@@ -7,7 +7,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="overlay">
+    <div id="join-modal">
+      <h2>Whiteboardio</h2>
+      <p>Enter a username to join the whiteboard</p>
+      <div id="join-row">
+        <input type="text" id="join-input" placeholder="Your name..." maxlength="20" autofocus />
+        <button id="join-submit">Join</button>
+      </div>
+    </div>
+  </div>
+
   <p id="status"></p>
+  <div id="toast"></div>
   <div id="toolbar">
     <button class="swatch" data-color="#1a1a1a" style="background:#1a1a1a"></button>
     <button class="swatch" data-color="#e74c3c" style="background:#e74c3c"></button>
@@ -19,8 +31,19 @@
     <button id="eraser">Eraser</button>
     <input type="range" id="thickness" min="1" max="30" value="3" title="Line thickness" />
     <button id="clear">Clear</button>
+    <span id="user-count"></span>
   </div>
   <canvas id="canvas"></canvas>
+
+  <div id="chat-panel">
+    <div id="chat-tab">💬</div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Type something..." maxlength="200" />
+      <button id="chat-send">↑</button>
+    </div>
+  </div>
+
   <script src="client.js"></script>
 </body>
 </html>
