@@ -12,7 +12,9 @@ Rita, välj färg, sudda etc. allt synkas direkt till alla som är anslutna!
 
 ## Kom igång
 
-Klona repot och installera beroenden:
+Projektet ligger deployat på [whiteboardio.gross.nu](https://whiteboardio.gross.nu/), du kan öppna länken i två flikar och börja rita direkt!
+
+Om du vill köra projektet lokalt, klona repot och installera beroenden:
 
 ```bash
 npm install
