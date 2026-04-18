@@ -47,3 +47,7 @@ Under utveckling kan man använda `npm run dev`, då startar servern om automati
 När en användare ritar skickas ett stroke-event till servern med koordinater, färg och penselstorlek. Servern vidarebefordrar det till alla andra anslutna klienter som ritar ut strecket på sin canvas. Det gör att alla ser samma sak utan att behöva ladda om sidan.
 
 Chatten fungerar på samma sätt: meddelanden skickas till servern som broadcastar dem till alla anslutna, inklusive avsändaren själv. Även clear-knappen och join/leave-notiser hanteras via WebSockets, så allt håller sig synkat i realtid
+
+## Rapport om WebSockets
+
+Jag har bifogat rapporten direkt här i repot, men du kan också läsa den direkt i [google docs](https://docs.google.com/document/d/1gz2lMZkChd6TKtUAyf2olH-KoJ7gH2lKvhtp0MKryYg/edit?usp=sharing) om det är bekvämare :)
