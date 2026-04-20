@@ -1,7 +1,9 @@
 # Whiteboardio
 
-En kollaborativ whiteboard där flera användare kan rita på samma canvas i realtid.
+En kollaborativ whiteboard (snarare ett offentligt klotterplank) där flera användare kan rita på samma canvas i realtid.
 Rita, välj färg, sudda etc. allt synkas direkt till alla som är anslutna!
+
+Planen var först att canvasen skulle vara blank varje gång man ansluter, dvs att man inte kan se något som ritats innan man anslutit, men det kändes roligare att hålla canvasen persistent och låta sidan fungera som ett helt öppet klotterplank för mina vänner och vem som helst som nu råkar snubbla in på den. Klotterplanket är helt omodererat, så risken finns att folk ritar dumheter, men så är det väl med klotter IRL också :)
 
 ## Teknik
 
